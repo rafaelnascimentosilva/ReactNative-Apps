@@ -7,18 +7,20 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Button 
           title="Gerar número aleatório"
-          onPress={geraNumerosAleatorios}
+          color="green"
+          onPress={RandomNumber}
         />
       </View>
     );
   }
 }
 
-const geraNumerosAleatorios = () => {
+const RandomNumber = () => {
   var numero_aleatorio = Math.random();
   numero_aleatorio = Math.floor(numero_aleatorio * 10);
   alert(numero_aleatorio);
-}
+};
+
 
 
 const styles = StyleSheet.create({
