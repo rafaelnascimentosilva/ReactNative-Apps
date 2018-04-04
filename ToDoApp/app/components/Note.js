@@ -9,7 +9,7 @@ import {
  } from 'react-native';
 
 export default class Note extends React.Component { 
-  render() {
+  render(){
     return (
         <View key={this.props.keyval} style = {styles.note}>
 
@@ -23,7 +23,6 @@ export default class Note extends React.Component {
     );
   }
 }
-
 const styles = StyleSheet.create({
     note: {
         position: 'relative',

@@ -26,32 +26,40 @@ export default class App extends React.Component {
         <View style = {styles.container}>
 
             <View style = {styles.header}>
-              <Text style = {styles.headerText}> My Notes </Text>
+              <Text style = {styles.headerText}> Minhas Notas </Text>
             </View>
 
             <ScrollView style = {styles.scrollContainer}>
              {notes}  
             </ScrollView>
 
-            <View style = {styles.footer}>
-
-                <TouchableOpacity onPress = {this.addNote.bind(this)} style = {styles.addButton}>
-                    <Text style = {styles.addButtonText}>+</Text>
-                </TouchableOpacity>
-
+            <View style = {styles.buttonContainer}>
+              <TouchableOpacity onPress = {this.addNote.bind(this)} style = {styles.addButton}>
+                      <Text style = {styles.addButtonText}>+</Text>
+              </TouchableOpacity>
+            </View>
+            <View style = {styles.footer}>             
                   <TextInput style = {styles.textInput} 
-                      onChangeText={(noteText)  => this.setState({noteText})} value={this.state.noteText}
-                      placeholder='note' placeholderTextColor='white' underlineColorAndroid='transparent' >                  
-                </TextInput>
-                
+                      onChangeText ={(noteText)  => this.setState({noteText})} value={this.state.noteText}
+                      placeholder='Nova Nota' placeholderTextColor='white' underlineColorAndroid='transparent' >                  
+                </TextInput>                
             </View>
           
         </View>
     );
   }
 
-  addNote(){
-    alert(this.state.noteText);
+  addNote(){  
+    if(this.state.noteText){
+      var d = new Date();
+      this.state.noteArray.push({'date': d.getDay()+ "/" + (d.getMonth() +1) +"/"+d.getFullYear(), 'note':this.state.noteText });
+      this.setState({noteArray: this.state.noteArray});
+      this.setState({noteText:''});
+    }
+  }
+  deleteNote(key){
+    this.state.noteArray.splice(key,1);
+    this.setState({noteArray: this.state.noteArray});
   }
 }
 
@@ -81,10 +89,17 @@ const styles = StyleSheet.create({
     left: 0,
     right:0,
   },
+  buttonContainer:{
+    position: 'relative',
+    alignItems: 'center',
+    bottom: 100,
+    left: 130,
+    right: 0,
+  },
   addButton:{
     backgroundColor: '#E91E63',
-    width: 90,
-    height: 90,
+    width: 60,
+    height: 60,
     borderRadius: 50,
     borderColor: '#ccc',
     alignItems: 'center',
